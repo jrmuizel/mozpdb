@@ -1,9 +1,9 @@
 [package]
-name = "pdb"
-version = "0.2.1"
+name = "mozpdb"
+version = "0.2.0"
 description = "A parser for Microsoft PDB (Program Database) debugging information"
-repository = "https://github.com/willglynn/pdb"
-authors = ["Will Glynn <will@willglynn.com>"]
+repository = "https://github.com/jrmuizel/pdb"
+authors = ["Jeff Muizelaar <jrmuizel@gmail.com>"]
 readme = "README.md"
 license = "MIT OR Apache-2.0"
 exclude = [
