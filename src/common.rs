@@ -298,6 +298,21 @@ pub enum Variant {
     I64(i64),
 }
 
+impl ::std::fmt::Display for Variant {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        match *self {
+            Variant::U8(value) => write!(f, "{}", value),
+            Variant::U16(value) => write!(f, "{}", value),
+            Variant::U32(value) => write!(f, "{}", value),
+            Variant::U64(value) => write!(f, "{}", value),
+            Variant::I8(value) => write!(f, "{}", value),
+            Variant::I16(value) => write!(f, "{}", value),
+            Variant::I32(value) => write!(f, "{}", value),
+            Variant::I64(value) => write!(f, "{}", value),
+        }
+    }
+}
+
 /// `RawString` refers to a `&[u8]` that physically resides somewhere inside a PDB data structure.
 ///
 /// A `RawString` may not be valid UTF-8.

@@ -111,7 +111,29 @@ impl<'t> Symbol<'t> {
             S_DATAREF | S_DATAREF_ST |
             S_ANNOTATIONREF => 10,
 
-            S_CONSTANT | S_CONSTANT_ST => 6,
+            S_CONSTANT | S_CONSTANT_ST => {
+                let mut constant_size = 6;
+
+                let mut buf = ParseBuffer::from(&self.0[2 + 4 ..]);
+                let leaf = buf.parse_u16()?;
+
+                if leaf >= ::tpi::constants::LF_NUMERIC {
+                    match leaf {
+                        ::tpi::constants::LF_CHAR =>      { constant_size += 1; },
+                        ::tpi::constants::LF_SHORT =>     { constant_size += 2; },
+                        ::tpi::constants::LF_LONG =>      { constant_size += 4; },
+                        ::tpi::constants::LF_QUADWORD =>  { constant_size += 8; },
+                        ::tpi::constants::LF_USHORT =>    { constant_size += 2; },
+                        ::tpi::constants::LF_ULONG =>     { constant_size += 4; },
+                        ::tpi::constants::LF_UQUADWORD => { constant_size += 8; },
+                        _ => {
+                            debug_assert!(false);
+                        }
+                    }
+                }
+
+                constant_size
+            },
 
             S_UDT | S_UDT_ST => 4,
 
@@ -255,7 +277,7 @@ fn parse_symbol_data(kind: u16, data: &[u8]) -> Result<SymbolData> {
         S_CONSTANT | S_CONSTANT_ST => {
             Ok(SymbolData::Constant(ConstantSymbol {
                 type_index: buf.parse_u32()?,
-                value: buf.parse_u16()?,
+                value: buf.parse_variant()?,
             }))
         }
 
@@ -423,7 +445,7 @@ pub struct AnnotationReferenceSymbol {
 #[derive(Debug,Copy,Clone,Eq,PartialEq)]
 pub struct ConstantSymbol {
     pub type_index: TypeIndex,
-    pub value: u16,
+    pub value: Variant,
 }
 
 /// The information parsed from a symbol record with kind `S_UDT`, or `S_UDT_ST`.
