@@ -634,7 +634,7 @@ mod tests {
             let buf = &[7, 17, 201, 18, 0, 0, 1, 0, 95, 95, 73, 83, 65, 95, 65, 86, 65, 73, 76, 65, 66, 76, 69, 95, 83, 83, 69, 50, 0, 0];
             let (symbol, data, name) = parse(buf).expect("parse");
             assert_eq!(symbol.raw_kind(), 0x1107);
-            assert_eq!(data, SymbolData::Constant(ConstantSymbol { type_index: 4809, value: 1 }));
+            assert_eq!(data, SymbolData::Constant(ConstantSymbol { type_index: 4809, value: Variant::U16(1) }));
             assert_eq!(name, "__ISA_AVAILABLE_SSE2");
         }
 
