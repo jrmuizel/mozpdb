@@ -1,4 +1,5 @@
-extern crate pdb;
+extern crate mozpdb;
+use mozpdb as pdb;
 use pdb::FallibleIterator;
 
 use std::collections::HashMap;

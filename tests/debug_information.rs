@@ -1,5 +1,6 @@
-extern crate pdb;
+extern crate mozpdb;
 
+use mozpdb as pdb;
 use std::str::FromStr;
 
 #[test]

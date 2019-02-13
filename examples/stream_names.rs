@@ -1,12 +1,13 @@
-extern crate pdb;
+extern crate mozpdb;
 
+use mozpdb as pdb;
 use std::env;
 use std::ffi::OsStr;
 use std::io::Write;
 
 fn dump_stream_names(filename: &OsStr) -> pdb::Result<()> {
     let file = std::fs::File::open(filename)?;
-    let mut pdb = pdb::PDB::open(file)?;
+    let mut pdb = mozpdb::PDB::open(file)?;
     let info = pdb.pdb_information()?;
     let names = info.stream_names()?;
     println!("index, name");

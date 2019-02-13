@@ -1,6 +1,7 @@
 extern crate getopts;
-extern crate pdb;
+extern crate mozpdb;
 
+use mozpdb as pdb;
 use getopts::Options;
 use pdb::FallibleIterator;
 use std::env;
