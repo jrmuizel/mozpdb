@@ -1,6 +1,6 @@
 [package]
 name = "mozpdb"
-version = "0.2.2"
+version = "0.2.5"
 description = "A parser for Microsoft PDB (Program Database) debugging information"
 repository = "https://github.com/jrmuizel/pdb"
 authors = ["Jeff Muizelaar <jrmuizel@gmail.com>"]
